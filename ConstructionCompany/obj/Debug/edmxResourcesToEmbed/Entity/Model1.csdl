@@ -1,0 +1,458 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="constructionCompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Brigade">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+    </Key>
+    <Property Name="idBrigade" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idBrigadier" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__Brigade__idBriga__2B3F6F97" FromRole="Brigade" ToRole="Worker" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Shedule__idBriga__38996AB5" FromRole="Brigade" ToRole="Order" />
+    <NavigationProperty Name="WorkersBrigade" Relationship="Self.FK__WorkersBr__idBri__2D27B809" FromRole="Brigade" ToRole="WorkersBrigade" />
+  </EntityType>
+  <EntityType Name="BrigadeView">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Brigadier" />
+    </Key>
+    <Property Name="idBrigade" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Brigadier" Type="String" MaxLength="302" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Worker" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Entrance">
+    <Key>
+      <PropertyRef Name="idEntrance" />
+    </Key>
+    <Property Name="idEntrance" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Login" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="idMaterial" />
+    </Key>
+    <Property Name="idMaterial" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cost" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="UseMaterial" Relationship="Self.FK_UseMaterial_Material" FromRole="Material" ToRole="UseMaterial" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="idObject" />
+    </Key>
+    <Property Name="idObject" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idObjectType" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="objectType" Relationship="Self.FK__Object__idObject__34C8D9D1" FromRole="Object" ToRole="objectType" />
+    <NavigationProperty Name="Order" Relationship="Self.FK__Shedule__idObjec__37A5467C" FromRole="Object" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="objectType">
+    <Key>
+      <PropertyRef Name="idObjectType" />
+    </Key>
+    <Property Name="idObjectType" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__Object__idObject__34C8D9D1" FromRole="objectType" ToRole="Object" />
+  </EntityType>
+  <EntityType Name="ObjectView">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idObject" Type="Int32" Nullable="false" />
+    <Property Name="idBrigade" Type="Int32" Nullable="false" />
+    <Property Name="From" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="To" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Brigade" Relationship="Self.FK__Shedule__idBriga__38996AB5" FromRole="Order" ToRole="Brigade" />
+    <NavigationProperty Name="Object" Relationship="Self.FK__Shedule__idObjec__37A5467C" FromRole="Order" ToRole="Object" />
+    <NavigationProperty Name="ServiceOrder" Relationship="Self.FK_ServiceOrder_Order" FromRole="Order" ToRole="ServiceOrder" />
+    <NavigationProperty Name="UseMaterial" Relationship="Self.FK_UseMaterial_Order" FromRole="Order" ToRole="UseMaterial" />
+  </EntityType>
+  <EntityType Name="OrderView">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Brigade" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Service" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="ServiceCost" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="Material" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="MaterialCost" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+    <Property Name="SUM" Type="Int32" />
+    <Property Name="Date" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idService" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cost" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="ServiceOrder" Relationship="Self.FK_ServiceOrder_Service" FromRole="Service" ToRole="ServiceOrder" />
+  </EntityType>
+  <EntityType Name="ServiceOrder">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="idService" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_ServiceOrder_Order" FromRole="ServiceOrder" ToRole="Order" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_ServiceOrder_Service" FromRole="ServiceOrder" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="specialtiesWorkers">
+    <Key>
+      <PropertyRef Name="idWorker" />
+      <PropertyRef Name="idSpecialty" />
+    </Key>
+    <Property Name="idWorker" Type="Int32" Nullable="false" />
+    <Property Name="idSpecialty" Type="Int32" Nullable="false" />
+    <Property Name="null" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Specialty" Relationship="Self.FK__specialti__idSpe__286302EC" FromRole="specialtiesWorkers" ToRole="Specialty" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__specialti__idWor__276EDEB3" FromRole="specialtiesWorkers" ToRole="Worker" />
+  </EntityType>
+  <EntityType Name="Specialty">
+    <Key>
+      <PropertyRef Name="idSpecialty" />
+    </Key>
+    <Property Name="idSpecialty" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="specialtiesWorkers" Relationship="Self.FK__specialti__idSpe__286302EC" FromRole="Specialty" ToRole="specialtiesWorkers" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UseMaterial">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idMaterial" />
+    </Key>
+    <Property Name="idOrder" Type="Int32" Nullable="false" />
+    <Property Name="idMaterial" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Material" Relationship="Self.FK_UseMaterial_Material" FromRole="UseMaterial" ToRole="Material" />
+    <NavigationProperty Name="Order" Relationship="Self.FK_UseMaterial_Order" FromRole="UseMaterial" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="idWorker" />
+    </Key>
+    <Property Name="idWorker" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Brigade" Relationship="Self.FK__Brigade__idBriga__2B3F6F97" FromRole="Worker" ToRole="Brigade" />
+    <NavigationProperty Name="specialtiesWorkers" Relationship="Self.FK__specialti__idWor__276EDEB3" FromRole="Worker" ToRole="specialtiesWorkers" />
+    <NavigationProperty Name="WorkersBrigade" Relationship="Self.FK__WorkersBr__idWor__2E1BDC42" FromRole="Worker" ToRole="WorkersBrigade" />
+  </EntityType>
+  <EntityType Name="WorkersBrigade">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+      <PropertyRef Name="idWorker" />
+    </Key>
+    <Property Name="idBrigade" Type="Int32" Nullable="false" />
+    <Property Name="idWorker" Type="Int32" Nullable="false" />
+    <Property Name="null" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Brigade" Relationship="Self.FK__WorkersBr__idBri__2D27B809" FromRole="WorkersBrigade" ToRole="Brigade" />
+    <NavigationProperty Name="Worker" Relationship="Self.FK__WorkersBr__idWor__2E1BDC42" FromRole="WorkersBrigade" ToRole="Worker" />
+  </EntityType>
+  <EntityType Name="WorkerView">
+    <Key>
+      <PropertyRef Name="idWorker" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Patronymic" />
+      <PropertyRef Name="DateBirth" />
+      <PropertyRef Name="Telephone" />
+    </Key>
+    <Property Name="idWorker" Type="Int32" Nullable="false" />
+    <Property Name="Surname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="DateBirth" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Telephone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Expr1" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="FK__Brigade__idBriga__2B3F6F97">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="Brigade">
+        <PropertyRef Name="idBrigadier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Shedule__idBriga__38996AB5">
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brigade">
+        <PropertyRef Name="idBrigade" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idBrigade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkersBr__idBri__2D27B809">
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="1" />
+    <End Role="WorkersBrigade" Type="Self.WorkersBrigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brigade">
+        <PropertyRef Name="idBrigade" />
+      </Principal>
+      <Dependent Role="WorkersBrigade">
+        <PropertyRef Name="idBrigade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseMaterial_Material">
+    <End Role="Material" Type="Self.Material" Multiplicity="1" />
+    <End Role="UseMaterial" Type="Self.UseMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="idMaterial" />
+      </Principal>
+      <Dependent Role="UseMaterial">
+        <PropertyRef Name="idMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__idObject__34C8D9D1">
+    <End Role="objectType" Type="Self.objectType" Multiplicity="1" />
+    <End Role="Object" Type="Self.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="objectType">
+        <PropertyRef Name="idObjectType" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="idObjectType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Shedule__idObjec__37A5467C">
+    <End Role="Object" Type="Self.Object" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="idObject" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceOrder_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="ServiceOrder" Type="Self.ServiceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="ServiceOrder">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseMaterial_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="UseMaterial" Type="Self.UseMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="UseMaterial">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceOrder_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="ServiceOrder" Type="Self.ServiceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="ServiceOrder">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__specialti__idSpe__286302EC">
+    <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+    <End Role="specialtiesWorkers" Type="Self.specialtiesWorkers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="idSpecialty" />
+      </Principal>
+      <Dependent Role="specialtiesWorkers">
+        <PropertyRef Name="idSpecialty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__specialti__idWor__276EDEB3">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="specialtiesWorkers" Type="Self.specialtiesWorkers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="specialtiesWorkers">
+        <PropertyRef Name="idWorker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkersBr__idWor__2E1BDC42">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="WorkersBrigade" Type="Self.WorkersBrigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="WorkersBrigade">
+        <PropertyRef Name="idWorker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Brigade" EntityType="Self.Brigade" />
+    <EntitySet Name="BrigadeView" EntityType="Self.BrigadeView" />
+    <EntitySet Name="Entrance" EntityType="Self.Entrance" />
+    <EntitySet Name="Material" EntityType="Self.Material" />
+    <EntitySet Name="Object" EntityType="Self.Object" />
+    <EntitySet Name="objectType" EntityType="Self.objectType" />
+    <EntitySet Name="ObjectView" EntityType="Self.ObjectView" />
+    <EntitySet Name="Order" EntityType="Self.Order" />
+    <EntitySet Name="OrderView" EntityType="Self.OrderView" />
+    <EntitySet Name="Service" EntityType="Self.Service" />
+    <EntitySet Name="ServiceOrder" EntityType="Self.ServiceOrder" />
+    <EntitySet Name="specialtiesWorkers" EntityType="Self.specialtiesWorkers" />
+    <EntitySet Name="Specialty" EntityType="Self.Specialty" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="UseMaterial" EntityType="Self.UseMaterial" />
+    <EntitySet Name="Worker" EntityType="Self.Worker" />
+    <EntitySet Name="WorkersBrigade" EntityType="Self.WorkersBrigade" />
+    <EntitySet Name="WorkerView" EntityType="Self.WorkerView" />
+    <AssociationSet Name="FK__Brigade__idBriga__2B3F6F97" Association="Self.FK__Brigade__idBriga__2B3F6F97">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="Brigade" EntitySet="Brigade" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Shedule__idBriga__38996AB5" Association="Self.FK__Shedule__idBriga__38996AB5">
+      <End Role="Brigade" EntitySet="Brigade" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkersBr__idBri__2D27B809" Association="Self.FK__WorkersBr__idBri__2D27B809">
+      <End Role="Brigade" EntitySet="Brigade" />
+      <End Role="WorkersBrigade" EntitySet="WorkersBrigade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseMaterial_Material" Association="Self.FK_UseMaterial_Material">
+      <End Role="Material" EntitySet="Material" />
+      <End Role="UseMaterial" EntitySet="UseMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__idObject__34C8D9D1" Association="Self.FK__Object__idObject__34C8D9D1">
+      <End Role="objectType" EntitySet="objectType" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Shedule__idObjec__37A5467C" Association="Self.FK__Shedule__idObjec__37A5467C">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceOrder_Order" Association="Self.FK_ServiceOrder_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="ServiceOrder" EntitySet="ServiceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseMaterial_Order" Association="Self.FK_UseMaterial_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="UseMaterial" EntitySet="UseMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceOrder_Service" Association="Self.FK_ServiceOrder_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="ServiceOrder" EntitySet="ServiceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__specialti__idSpe__286302EC" Association="Self.FK__specialti__idSpe__286302EC">
+      <End Role="Specialty" EntitySet="Specialty" />
+      <End Role="specialtiesWorkers" EntitySet="specialtiesWorkers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__specialti__idWor__276EDEB3" Association="Self.FK__specialti__idWor__276EDEB3">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="specialtiesWorkers" EntitySet="specialtiesWorkers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkersBr__idWor__2E1BDC42" Association="Self.FK__WorkersBr__idWor__2E1BDC42">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="WorkersBrigade" EntitySet="WorkersBrigade" />
+    </AssociationSet>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(constructionCompanyModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(constructionCompanyModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+  </EntityContainer>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+</Schema>

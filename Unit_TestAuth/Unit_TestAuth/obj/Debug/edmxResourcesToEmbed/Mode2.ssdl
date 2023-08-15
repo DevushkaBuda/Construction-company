@@ -1,0 +1,424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище constructionCompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Brigade">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+    </Key>
+    <Property Name="idBrigade" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="idBrigadier" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="BrigadeView">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Brigadier" />
+    </Key>
+    <Property Name="idBrigade" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Brigadier" Type="nvarchar" MaxLength="302" Nullable="false" />
+    <Property Name="Worker" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <EntityType Name="Entrance">
+    <Key>
+      <PropertyRef Name="idEntrance" />
+    </Key>
+    <Property Name="idEntrance" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Material">
+    <Key>
+      <PropertyRef Name="idMaterial" />
+    </Key>
+    <Property Name="idMaterial" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="unit" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cost" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Object">
+    <Key>
+      <PropertyRef Name="idObject" />
+    </Key>
+    <Property Name="idObject" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="idObjectType" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="objectType">
+    <Key>
+      <PropertyRef Name="idObjectType" />
+    </Key>
+    <Property Name="idObjectType" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ObjectView">
+    <Key>
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Address" />
+      <PropertyRef Name="Type" />
+    </Key>
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idObject" Type="int" Nullable="false" />
+    <Property Name="idBrigade" Type="int" Nullable="false" />
+    <Property Name="From" Type="datetime" Nullable="false" />
+    <Property Name="To" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderView">
+    <Key>
+      <PropertyRef Name="idOrder" />
+    </Key>
+    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" />
+    <Property Name="Address" Type="nvarchar" MaxLength="100" />
+    <Property Name="Type" Type="nvarchar" MaxLength="100" />
+    <Property Name="Brigade" Type="nvarchar" MaxLength="100" />
+    <Property Name="Service" Type="nvarchar" MaxLength="4000" />
+    <Property Name="ServiceCost" Type="nvarchar" MaxLength="4000" />
+    <Property Name="Material" Type="nvarchar" MaxLength="4000" />
+    <Property Name="MaterialCost" Type="nvarchar" MaxLength="4000" />
+    <Property Name="SUM" Type="int" />
+    <Property Name="Date" Type="varchar" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idService" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="unit" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cost" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServiceOrder">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="idService" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="specialtiesWorkers">
+    <Key>
+      <PropertyRef Name="idWorker" />
+      <PropertyRef Name="idSpecialty" />
+    </Key>
+    <Property Name="idWorker" Type="int" Nullable="false" />
+    <Property Name="idSpecialty" Type="int" Nullable="false" />
+    <Property Name="null" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Specialty">
+    <Key>
+      <PropertyRef Name="idSpecialty" />
+    </Key>
+    <Property Name="idSpecialty" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="UseMaterial">
+    <Key>
+      <PropertyRef Name="idOrder" />
+      <PropertyRef Name="idMaterial" />
+    </Key>
+    <Property Name="idOrder" Type="int" Nullable="false" />
+    <Property Name="idMaterial" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Worker">
+    <Key>
+      <PropertyRef Name="idWorker" />
+    </Key>
+    <Property Name="idWorker" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateBirth" Type="datetime" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WorkersBrigade">
+    <Key>
+      <PropertyRef Name="idBrigade" />
+      <PropertyRef Name="idWorker" />
+    </Key>
+    <Property Name="idBrigade" Type="int" Nullable="false" />
+    <Property Name="idWorker" Type="int" Nullable="false" />
+    <Property Name="null" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="WorkerView">
+    <Key>
+      <PropertyRef Name="idWorker" />
+      <PropertyRef Name="Surname" />
+      <PropertyRef Name="Name" />
+      <PropertyRef Name="Patronymic" />
+      <PropertyRef Name="DateBirth" />
+      <PropertyRef Name="Telephone" />
+    </Key>
+    <Property Name="idWorker" Type="int" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Patronymic" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateBirth" Type="datetime" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="Expr1" Type="nvarchar" MaxLength="4000" />
+  </EntityType>
+  <Association Name="FK__Brigade__idBriga__2B3F6F97">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="Brigade">
+        <PropertyRef Name="idBrigadier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Object__idObject__34C8D9D1">
+    <End Role="objectType" Type="Self.objectType" Multiplicity="1" />
+    <End Role="Object" Type="Self.Object" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="objectType">
+        <PropertyRef Name="idObjectType" />
+      </Principal>
+      <Dependent Role="Object">
+        <PropertyRef Name="idObjectType" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Shedule__idBriga__38996AB5">
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brigade">
+        <PropertyRef Name="idBrigade" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idBrigade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Shedule__idObjec__37A5467C">
+    <End Role="Object" Type="Self.Object" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Object">
+        <PropertyRef Name="idObject" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="idObject" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__specialti__idSpe__286302EC">
+    <End Role="Specialty" Type="Self.Specialty" Multiplicity="1" />
+    <End Role="specialtiesWorkers" Type="Self.specialtiesWorkers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Specialty">
+        <PropertyRef Name="idSpecialty" />
+      </Principal>
+      <Dependent Role="specialtiesWorkers">
+        <PropertyRef Name="idSpecialty" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__specialti__idWor__276EDEB3">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="specialtiesWorkers" Type="Self.specialtiesWorkers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="specialtiesWorkers">
+        <PropertyRef Name="idWorker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkersBr__idBri__2D27B809">
+    <End Role="Brigade" Type="Self.Brigade" Multiplicity="1" />
+    <End Role="WorkersBrigade" Type="Self.WorkersBrigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brigade">
+        <PropertyRef Name="idBrigade" />
+      </Principal>
+      <Dependent Role="WorkersBrigade">
+        <PropertyRef Name="idBrigade" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__WorkersBr__idWor__2E1BDC42">
+    <End Role="Worker" Type="Self.Worker" Multiplicity="1" />
+    <End Role="WorkersBrigade" Type="Self.WorkersBrigade" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Worker">
+        <PropertyRef Name="idWorker" />
+      </Principal>
+      <Dependent Role="WorkersBrigade">
+        <PropertyRef Name="idWorker" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceOrder_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="ServiceOrder" Type="Self.ServiceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="ServiceOrder">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ServiceOrder_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="ServiceOrder" Type="Self.ServiceOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="ServiceOrder">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseMaterial_Material">
+    <End Role="Material" Type="Self.Material" Multiplicity="1" />
+    <End Role="UseMaterial" Type="Self.UseMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Material">
+        <PropertyRef Name="idMaterial" />
+      </Principal>
+      <Dependent Role="UseMaterial">
+        <PropertyRef Name="idMaterial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UseMaterial_Order">
+    <End Role="Order" Type="Self.Order" Multiplicity="1" />
+    <End Role="UseMaterial" Type="Self.UseMaterial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="idOrder" />
+      </Principal>
+      <Dependent Role="UseMaterial">
+        <PropertyRef Name="idOrder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="Хранилище constructionCompanyModelContainer">
+    <EntitySet Name="Brigade" EntityType="Self.Brigade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BrigadeView" EntityType="Self.BrigadeView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Entrance" EntityType="Self.Entrance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Material" EntityType="Self.Material" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Object" EntityType="Self.Object" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="objectType" EntityType="Self.objectType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ObjectView" EntityType="Self.ObjectView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderView" EntityType="Self.OrderView" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ServiceOrder" EntityType="Self.ServiceOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="specialtiesWorkers" EntityType="Self.specialtiesWorkers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Specialty" EntityType="Self.Specialty" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UseMaterial" EntityType="Self.UseMaterial" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Worker" EntityType="Self.Worker" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkersBrigade" EntityType="Self.WorkersBrigade" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WorkerView" EntityType="Self.WorkerView" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Brigade__idBriga__2B3F6F97" Association="Self.FK__Brigade__idBriga__2B3F6F97">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="Brigade" EntitySet="Brigade" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Object__idObject__34C8D9D1" Association="Self.FK__Object__idObject__34C8D9D1">
+      <End Role="objectType" EntitySet="objectType" />
+      <End Role="Object" EntitySet="Object" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Shedule__idBriga__38996AB5" Association="Self.FK__Shedule__idBriga__38996AB5">
+      <End Role="Brigade" EntitySet="Brigade" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Shedule__idObjec__37A5467C" Association="Self.FK__Shedule__idObjec__37A5467C">
+      <End Role="Object" EntitySet="Object" />
+      <End Role="Order" EntitySet="Order" />
+    </AssociationSet>
+    <AssociationSet Name="FK__specialti__idSpe__286302EC" Association="Self.FK__specialti__idSpe__286302EC">
+      <End Role="Specialty" EntitySet="Specialty" />
+      <End Role="specialtiesWorkers" EntitySet="specialtiesWorkers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__specialti__idWor__276EDEB3" Association="Self.FK__specialti__idWor__276EDEB3">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="specialtiesWorkers" EntitySet="specialtiesWorkers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkersBr__idBri__2D27B809" Association="Self.FK__WorkersBr__idBri__2D27B809">
+      <End Role="Brigade" EntitySet="Brigade" />
+      <End Role="WorkersBrigade" EntitySet="WorkersBrigade" />
+    </AssociationSet>
+    <AssociationSet Name="FK__WorkersBr__idWor__2E1BDC42" Association="Self.FK__WorkersBr__idWor__2E1BDC42">
+      <End Role="Worker" EntitySet="Worker" />
+      <End Role="WorkersBrigade" EntitySet="WorkersBrigade" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceOrder_Order" Association="Self.FK_ServiceOrder_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="ServiceOrder" EntitySet="ServiceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ServiceOrder_Service" Association="Self.FK_ServiceOrder_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="ServiceOrder" EntitySet="ServiceOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseMaterial_Material" Association="Self.FK_UseMaterial_Material">
+      <End Role="Material" EntitySet="Material" />
+      <End Role="UseMaterial" EntitySet="UseMaterial" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UseMaterial_Order" Association="Self.FK_UseMaterial_Order">
+      <End Role="Order" EntitySet="Order" />
+      <End Role="UseMaterial" EntitySet="UseMaterial" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

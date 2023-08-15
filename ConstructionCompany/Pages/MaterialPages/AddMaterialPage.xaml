@@ -1,0 +1,89 @@
+﻿<Page x:Class="ConstructionCompany.Pages.MaterialPages.AddMaterialPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ConstructionCompany.Pages.MaterialPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="700" 
+      d:DesignWidth="1260"
+      Title="AddMaterialPage">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="2"
+                   Grid.Column="1"
+                   Text="Название материала:"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,340,0"/>
+        <TextBox x:Name="NameBox"
+                 FontSize="26"
+                 Margin="240,40,30,40"
+                 Grid.Row="2"
+                 Grid.Column="1"
+                 MaxLength="100"
+                 BorderBrush="LightSlateGray"
+                 PreviewTextInput="IsDigitIsLetter_PreviewTextInput"
+                 PreviewKeyDown="QuantityBox_PreviewKeyDown"/>
+
+        <TextBlock Grid.Row="3"
+                   Grid.Column="1"
+                   Text="Еденица измерения:"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,340,0"/>
+        <TextBox x:Name="UnitBox"
+                 FontSize="26"
+                 Margin="240,40,30,40"
+                 Grid.Row="3"
+                 Grid.Column="1"
+                 MaxLength="100"
+                 BorderBrush="LightSlateGray"
+                 PreviewTextInput="IsLetterAndPoint_PreviewTextInput"
+                 PreviewKeyDown="QuantityBox_PreviewKeyDown"/>
+
+        <TextBlock Grid.Row="2"
+                   Grid.Column="2"
+                   Text="Цена:"
+                   FontSize="24"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Right"
+                   Margin="0,0,380,0"/>
+        <TextBox x:Name="CostBox"
+                 FontSize="26"
+                 Margin="200,40,60,40"
+                 Grid.Row="2"
+                 Grid.Column="2"
+                 MaxLength="15"
+                 BorderBrush="LightSlateGray"
+                 PreviewTextInput="IsDigit_PreviewTextInput"
+                 PreviewKeyDown="QuantityBox_PreviewKeyDown"/>
+        <Button x:Name="MaterialFinish"
+                Style="{StaticResource jB}"
+                Background="#3dc147"
+                Grid.Row="5"
+                Grid.Column="2"
+                Margin="230,60,20,20"
+                Content="Добавить Объект"
+                FontSize="28"
+                Click="MaterialFinish_Click"
+                />
+    </Grid>
+</Page>
